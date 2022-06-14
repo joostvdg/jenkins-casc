@@ -33,7 +33,7 @@ jenkins:
         serviceAccount: "default"
         slaveConnectTimeout: 100
         slaveConnectTimeoutStr: "100"
-        yamlMergeStrategy: ""
+        yamlMergeStrategy: "override"
       - name: mavenjdk8
         label: mavenpodtemplate
         containers:
