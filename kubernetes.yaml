@@ -34,20 +34,19 @@ jenkins:
         slaveConnectTimeout: 100
         slaveConnectTimeoutStr: "100"
         yamlMergeStrategy: "
-        templates:
-          - name: mavenjdk8
-            label: mavenpodtemplate
-            containers:
-              - name: maven
-                image: maven:3.3.9-jdk-8-alpine
-                ttyEnabled: true
-                command: cat
-                args: ""
-          - name: mavenjdk11
-            label: mavenpodtemplate
-            containers:
-              - name: maven
-                image: maven:3-jdk-11
-                ttyEnabled: true
-                command: cat
-                args: ""
+      - name: mavenjdk8
+        label: mavenpodtemplate
+        containers:
+          - name: maven
+            image: maven:3.3.9-jdk-8-alpine
+            ttyEnabled: true
+            command: cat
+            args: ""
+      - name: mavenjdk11
+        label: mavenpodtemplate
+        containers:
+          - name: maven
+            image: maven:3-jdk-11
+            ttyEnabled: true
+            command: cat
+            args: ""
