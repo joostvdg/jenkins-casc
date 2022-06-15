@@ -1,0 +1,27 @@
+jenkins:
+  securityRealm:
+    oic:
+      clientId: "${clientID}"
+      clientSecret: "${clientSecret}"
+      wellKnownOpenIDConfigurationUrl: "${keycloakUrl}/auth/realms/master/.well-known/openid-configuration"
+      tokenServerUrl: "${keycloakUrl}/auth/realms/master/protocol/openid-connect/token"
+      authorizationServerUrl: "${keycloakUrl}/auth/realms/master/protocol/openid-connect/auth"
+      userInfoServerUrl: "${keycloakUrl}/auth/realms/master/protocol/openid-connect/userinfo"
+      userNameField: "preferred_username"
+      fullNameFieldName: "name"
+      emailFieldName: "email"
+      groupsFieldName: "group-membership"
+      scopes: "web-origins acr address phone openid offline_access profile roles microprofile-jwt email"
+      disableSslVerification: false
+      logoutFromOpenidProvider: true
+      endSessionUrl: "${keycloakUrl}/auth/realms/master/protocol/openid-connect/logout"
+      postLogoutRedirectUrl: ""
+      escapeHatchEnabled: false
+      escapeHatchSecret: ""
+  authorizationStrategy:
+    globalMatrix:
+      permissions:
+        - "Overall/Read:authenticated"
+        - "Overall/Administer:jvandergriendt"
+        - "Overall/Administer:Administrators"
+        - "Overall/Administer:/Administrators"
