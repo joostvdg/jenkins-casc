@@ -1,49 +1,5 @@
 jenkins:
   systemMessage: "Jenkins configured automatically by Jenkins Configuration as Code plugin\n\n"
   numExecutors: 0
-  
-  securityRealm: 
-    local:
-      allowsSignup: false
-      enableCaptcha: false
-  authorizationStrategy:
-    loggedInUsersCanDoAnything:
-      allowAnonymousRead: false
 
-
-unclassified:
-  globalLibraries:
-    libraries:
-      - name: "awesome-lib"
-        retriever:
-          modernSCM:
-            scm:
-              git:
-                remote: "https://github.com/jenkins-infra/pipeline-library.git"
-
-      - name: "jpl-core"
-        retriever:
-          modernSCM:
-            scm:
-              git:
-                remote: "https://github.com/joostvdg/jpl-core.git"
-
-      - name: "jpl-maven"
-        retriever:
-          modernSCM:
-            scm:
-              git:
-                remote: "https://github.com/joostvdg/jpl-maven.git"
-
-      - name: "jpl-gitops-kubernetes"
-        retriever:
-          modernSCM:
-            scm:
-              git:
-                remote: "https://github.com/joostvdg/jpl-gitops-kubernetes.git"
-      - name: "jpl-podtemplates"
-        retriever:
-          modernSCM:
-            scm:
-              git:
-                remote: "https://github.com/joostvdg/jpl-podtemplates.git"                
+     
