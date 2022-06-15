@@ -15,7 +15,7 @@ jenkins:
       scopes: "web-origins acr address phone openid offline_access roles profile microprofile-jwt email"
       tokenServerUrl: "${readFile:/run/secrets/keycloakUrl}/realms/master/protocol/openid-connect/token"
       userInfoServerUrl: "${readFile:/run/secrets/keycloakUrl}/realms/master/protocol/openid-connect/userinfo"
-      userNameField: "given_name"
+      userNameField: "cn"
       wellKnownOpenIDConfigurationUrl: "${readFile:/run/secrets/keycloakUrl}/auth/realms/master/.well-known/openid-configuration"
   authorizationStrategy:
     globalMatrix:
