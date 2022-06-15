@@ -9,7 +9,7 @@ jenkins:
       endSessionEndpoint: "${readFile:/run/secrets/keycloakUrl}/realms/master/protocol/openid-connect/logout"
       escapeHatchEnabled: false
       escapeHatchSecret: ""
-      fullNameFieldName: "given_name"
+      fullNameFieldName: "cn"
       groupsFieldName: "group-membership"
       logoutFromOpenidProvider: true
       scopes: "web-origins acr address phone openid offline_access roles profile microprofile-jwt email"
