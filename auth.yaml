@@ -1,22 +1,22 @@
 jenkins:
   securityRealm:
     oic:
-      authorizationServerUrl: "${keycloakUrl}/realms/master/protocol/openid-connect/auth"
-      clientId: "${clientID}"
-      clientSecret: "${clientSecret}"
+      authorizationServerUrl: "${readFile:/run/secrets/keycloakUrl}/realms/master/protocol/openid-connect/auth"
+      clientId: "${readFile:/run/secrets/clientID}"
+      clientSecret: "${readFile:/run/secrets/clientSecret}"
       disableSslVerification: true
       emailFieldName: "email"
-      endSessionEndpoint: "${keycloakUrl}/realms/master/protocol/openid-connect/logout"
+      endSessionEndpoint: "${readFile:/run/secrets/keycloakUrl}/realms/master/protocol/openid-connect/logout"
       escapeHatchEnabled: false
       escapeHatchSecret: ""
       fullNameFieldName: "name"
       groupsFieldName: "group-membership"
       logoutFromOpenidProvider: true
       scopes: "web-origins acr address phone openid offline_access roles profile microprofile-jwt email"
-      tokenServerUrl: "${keycloakUrl}/realms/master/protocol/openid-connect/token"
-      userInfoServerUrl: "${keycloakUrl}/realms/master/protocol/openid-connect/userinfo"
+      tokenServerUrl: "${readFile:/run/secrets/keycloakUrl}/realms/master/protocol/openid-connect/token"
+      userInfoServerUrl: "${readFile:/run/secrets/keycloakUrl}/realms/master/protocol/openid-connect/userinfo"
       userNameField: "preferred_username"
-      wellKnownOpenIDConfigurationUrl: "${keycloakUrl}/auth/realms/master/.well-known/openid-configuration"
+      wellKnownOpenIDConfigurationUrl: "${readFile:/run/secrets/keycloakUrl}/auth/realms/master/.well-known/openid-configuration"
   authorizationStrategy:
     globalMatrix:
       permissions:
