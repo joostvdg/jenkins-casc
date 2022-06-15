@@ -9,13 +9,13 @@ jenkins:
       endSessionEndpoint: "${readFile:/run/secrets/keycloakUrl}/realms/master/protocol/openid-connect/logout"
       escapeHatchEnabled: false
       escapeHatchSecret: ""
-      fullNameFieldName: "cn"
+      fullNameFieldName: "given_name"
       groupsFieldName: "group-membership"
       logoutFromOpenidProvider: true
       scopes: "web-origins acr address phone openid offline_access roles profile microprofile-jwt email"
       tokenServerUrl: "${readFile:/run/secrets/keycloakUrl}/realms/master/protocol/openid-connect/token"
       userInfoServerUrl: "${readFile:/run/secrets/keycloakUrl}/realms/master/protocol/openid-connect/userinfo"
-      userNameField: "cn"
+      userNameField: "given_name"
       wellKnownOpenIDConfigurationUrl: "${readFile:/run/secrets/keycloakUrl}/auth/realms/master/.well-known/openid-configuration"
   authorizationStrategy:
     globalMatrix:
