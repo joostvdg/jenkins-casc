@@ -3,11 +3,11 @@ jenkins:
   numExecutors: 0
 
      
-  openTelemetry:
-    authentication: "noAuthentication"
-    disabledResourceProviders: "io.opentelemetry.sdk.extension.resources.ProcessResourceProvider"
-    endpoint: "http://wavefront-proxy.wavefront.svc.cluster.local:4317"
-    exportOtelConfigurationAsEnvironmentVariables: true
-    ignoredSteps: "dir,echo,isUnix,pwd,properties"
-    serviceName: "jenkins"
-    serviceNamespace: "jenkins"
+#   openTelemetry:
+#     authentication: "noAuthentication"
+#     disabledResourceProviders: "io.opentelemetry.sdk.extension.resources.ProcessResourceProvider"
+#     endpoint: "http://wavefront-proxy.wavefront.svc.cluster.local:4317"
+#     exportOtelConfigurationAsEnvironmentVariables: true
+#     ignoredSteps: "dir,echo,isUnix,pwd,properties"
+#     serviceName: "jenkins"
+#     serviceNamespace: "jenkins"
