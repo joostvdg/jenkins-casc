@@ -1,26 +1,12 @@
 jenkins:
   securityRealm:
-    oic:
-      authorizationServerUrl: "${readFile:/run/secrets/keycloakUrl}/realms/master/protocol/openid-connect/auth"
-      clientId: "${readFile:/run/secrets/clientID}"
-      clientSecret: "${readFile:/run/secrets/clientSecret}"
-      disableSslVerification: true
-      emailFieldName: "email"
-      endSessionEndpoint: "${readFile:/run/secrets/keycloakUrl}/realms/master/protocol/openid-connect/logout"
-      escapeHatchEnabled: false
-      escapeHatchSecret: ""
-      fullNameFieldName: "preferred_username"
-      groupsFieldName: "group-membership"
-      logoutFromOpenidProvider: true
-      scopes: "web-origins acr address phone openid offline_access roles profile microprofile-jwt email"
-      tokenServerUrl: "${readFile:/run/secrets/keycloakUrl}/realms/master/protocol/openid-connect/token"
-      userInfoServerUrl: "${readFile:/run/secrets/keycloakUrl}/realms/master/protocol/openid-connect/userinfo"
-      userNameField: "preferred_username"
-      wellKnownOpenIDConfigurationUrl: "${readFile:/run/secrets/keycloakUrl}/auth/realms/master/.well-known/openid-configuration"
+    local:
+      allowsSignup: false
+      enableCaptcha: false
+      users:
+      - id: "administrator"
+        name: "Jenkins Admin"
+        password: "VMware123!"
   authorizationStrategy:
-    globalMatrix:
-      permissions:
-        - "Overall/Read:authenticated"
-        - "Overall/Administer:jvandergriendt"
-        - "Overall/Administer:Administrators"
-        - "Overall/Administer:/Administrators"
+    loggedInUsersCanDoAnything:
+      allowAnonymousRead: false
