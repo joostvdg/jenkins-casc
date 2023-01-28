@@ -75,3 +75,41 @@ controller:
 
 agent:
   image: harbor.10.220.2.199.sslip.io/jenkins/inbound-agent
+
+persistence:
+  enabled: true
+  volumes:
+  - name: content-from-git
+    emptyDir: {}
+  - name: oic-auth-clientid
+    secret:
+      secretName: oic-auth
+      items:
+        - key: clientID
+          path: clientID
+  - name: oic-auth-clientsecret
+    secret:
+      secretName: oic-auth
+      items:
+        - key: clientSecret
+          path: clientSecret
+  - name: oic-auth-keycloakurl
+    secret:
+      secretName: oic-auth
+      items:
+        - key: keycloakUrl
+          path: keycloakUrl
+  mounts:
+  - name: content-from-git
+    mountPath: /var/jenkins_config/casc_configs
+    readOnly: true
+  - name: oic-auth-clientid
+    mountPath: /run/secrets/clientID
+    subPath: clientID
+  - name: oic-auth-clientsecret
+    mountPath: /run/secrets/clientSecret
+    subPath: clientSecret
+  - name: oic-auth-keycloakurl
+    mountPath: /run/secrets/keycloakUrl
+    subPath: keycloakUrl
+
