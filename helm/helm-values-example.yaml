@@ -1,0 +1,77 @@
+controller:
+  componentName: "jenkins-controller"
+  image: "harbor.10.220.2.199.sslip.io/jenkins/jenkins"
+  tag: "2.361.4-jdk11"
+  tagLabel: jdk11
+  imagePullPolicy: "Always"
+  disableRememberMe: false
+  numExecutors: 0
+
+  jenkinsUrl: "http://jenkins.10.220.2.199.nip.io"
+  # jenkinsUriPrefix: "/jenkins"
+  installPlugins:
+    - kubernetes
+    - workflow-aggregator
+    - git
+    - configuration-as-code
+
+  # Set to false to download the minimum required version of all dependencies.
+  installLatestPlugins: true
+
+  # Set to true to download latest dependencies of any plugin that is requested to have the latest version.
+  installLatestSpecifiedPlugins: true
+
+  # List of plugins to install in addition to those listed in controller.installPlugins
+  # opentelemetry:2.8.0
+  additionalPlugins: [prometheus,pipeline-graph-view,blueocean,ldap,job-dsl,hashicorp-vault-plugin,kubernetes-credentials,github-checks,matrix-auth,oic-auth,github-branch-source,pipeline-utility-steps,cloudbees-disk-usage-simple]
+
+  # 'name' is a name of an existing secret in same namespace as jenkins,
+  # 'keyName' is the name of one of the keys inside current secret.
+  # the 'name' and 'keyName' are concatenated with a '-' in between, so for example:
+  # an existing secret "secret-credentials" and a key inside it named "github-password" should be used in Jcasc as ${secret-credentials-github-password}
+  # 'name' and 'keyName' must be lowercase RFC 1123 label must consist of lower case alphanumeric characters or '-',
+  # and must start and end with an alphanumeric character (e.g. 'my-name',  or '123-abc')
+  additionalExistingSecrets: 
+    - name: github-token
+      keyName: user
+    - name: github-token
+      keyName: token
+
+  JCasC:
+    defaultConfig: false
+
+  healthProbes: false
+
+  ingress:
+    enabled: true
+    hostName: jenkins.10.220.2.199.nip.io
+
+  sidecars:
+    configAutoReload:
+      enabled: false
+      image: harbor.10.220.2.199.sslip.io/jenkins/k8s-sidecar
+      folder: /var/jenkins_config/casc_configs/jenkins-casc  # doesn't seem to check if this is used or not...
+    # Allows you to inject additional/other sidecars
+    other: 
+    - name: git-sync
+      # https://github.com/kubernetes/git-sync/blob/master/docs/kubernetes.md
+      # This container pulls git data and publishes it into volume
+      # "content-from-git".  In that volume you will find a symlink
+      # "current" (see -dest below) which points to a checked-out copy of
+      # the master branch (see -branch) of the repo (see -repo).
+      # NOTE: git-sync already runs as non-root.
+      ## gcr.io/k8s-staging-git-sync/git-sync:v3.3.4__linux_amd64
+      ## gcr.io/k8s-staging-git-sync/git-sync@sha256:866599ca98bcde1404b56152d8601888a5d3dae7fc21665155577d607652aa09
+      image: gcr.io/k8s-staging-git-sync/git-sync@sha256:866599ca98bcde1404b56152d8601888a5d3dae7fc21665155577d607652aa09
+      args:
+        - --repo=https://github.com/joostvdg/jenkins-casc
+        - --branch=minimal
+        - --depth=1
+        - --wait=20
+        - --root=/git
+      volumeMounts:
+        - name: content-from-git
+          mountPath: /git
+
+agent:
+  image: harbor.10.220.2.199.sslip.io/jenkins/inbound-agent
